@@ -1,0 +1,14 @@
+mainmenu "PTXdist $(PTXDIST_VERSION_FULL)"
+
+source "generated/fixme.in"
+
+source "generated/project_name.in"
+menu "Project Options               "
+source "generated/project_specific.in"
+endmenu
+
+menu "KODI                          "
+source "generated/kodi_specific.in"
+endmenu
+
+source "rules/Kconfig"

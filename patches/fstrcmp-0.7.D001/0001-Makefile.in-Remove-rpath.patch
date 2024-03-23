@@ -1,0 +1,25 @@
+From: Ladislav Michl <ladis@linux-mips.org>
+Date: Sat, 23 Mar 2024 20:04:50 +0100
+Subject: [PATCH] Makefile.in: Remove -rpath
+
+Fixes crosscompiltion error:
+/usr/bin/ld: lib/ac/.libs/string.o: relocations in generic ELF (EM: 40)
+/usr/bin/ld: lib/ac/.libs/string.o: relocations in generic ELF (EM: 40)
+/usr/bin/ld: lib/ac/.libs/string.o: error adding symbols: file in wrong format
+---
+ Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index f8cb3c6caf30..faa9c3c22740 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -507,7 +507,7 @@ lib_obj = lib/ac/string.lo lib/downcase.lo lib/fmemcmp.lo lib/fmemcmpi.lo \
+ lib/libfstrcmp.la: $(lib_obj)
+ 	rm -f $@
+ 	$(LIBTOOL) --mode=link --tag=CC $(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) \
+-		-o $@ $(lib_obj) $(LIBS) -rpath $(libdir) -version-info 6:0:6
++		-o $@ $(lib_obj) $(LIBS) -version-info 6:0:6
+ 
+ #
+ # The install of the *.la file automatically causes "$(LIBTOOL) --mode=install"

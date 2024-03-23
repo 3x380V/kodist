@@ -1,0 +1,9 @@
+## SECTION=system_libraries
+
+config TINYXML2
+	tristate
+	prompt "tinyxml2"
+	select HOST_CMAKE
+	help
+	  TinyXML2 is a simple, small, efficient, C++ XML parser that
+	  can be easily integrated into other programs. 

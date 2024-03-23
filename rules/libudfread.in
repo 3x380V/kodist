@@ -1,0 +1,7 @@
+## SECTION=multimedia_libs
+
+config LIBUDFREAD
+	tristate
+	prompt "libudfread"
+	help
+	  Library for reading UDF from raw devices and image files.

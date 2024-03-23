@@ -1,0 +1,8 @@
+## SECTION=shell_and_console
+
+config FSTRCMP
+	tristate
+	prompt "fstrcmp"
+	help
+	  A shared library for making fuzzy string comparisons, and also
+	  an fstrcmp command for use in shell scripts.

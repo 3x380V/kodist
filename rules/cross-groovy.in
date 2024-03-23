@@ -1,0 +1,5 @@
+## SECTION=hosttools_noprompt
+
+config CROSS_GROOVY
+	tristate
+	default y if ALLYES

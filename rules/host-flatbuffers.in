@@ -1,0 +1,6 @@
+## SECTION=hosttools_noprompt
+
+config HOST_FLATBUFFERS
+	tristate
+	default y if ALLYES
+	select HOST_CMAKE

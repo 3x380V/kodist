@@ -1,0 +1,65 @@
+From: Ladislav Michl <ladis@linux-mips.org>
+Date: Tue, 9 Apr 2024 17:07:02 +0200
+Subject: [PATCH] FindWaylandpp
+
+Allow wayland-scanner++ path to be specified.
+---
+ cmake/modules/FindWaylandpp.cmake | 30 +++++++++++++++++++++---------
+ 1 file changed, 21 insertions(+), 9 deletions(-)
+
+diff --git a/cmake/modules/FindWaylandpp.cmake b/cmake/modules/FindWaylandpp.cmake
+index 06ed683e8a19..d5a3ca099433 100644
+--- a/cmake/modules/FindWaylandpp.cmake
++++ b/cmake/modules/FindWaylandpp.cmake
+@@ -10,6 +10,7 @@
+ # WAYLANDPP_DEFINITIONS  - the waylandpp definitions
+ # WAYLANDPP_SCANNER      - path to wayland-scanner++
+ 
++find_package(PkgConfig)
+ pkg_check_modules(PC_WAYLANDPP wayland-client++ wayland-egl++ wayland-cursor++ QUIET)
+ 
+ if(PC_WAYLANDPP_FOUND)
+@@ -18,12 +19,27 @@ else()
+   message(SEND_ERROR "wayland-client++ not found via pkg-config")
+ endif()
+ 
+-pkg_check_modules(PC_WAYLANDPP_SCANNER wayland-scanner++ QUIET)
+-
+-if(PC_WAYLANDPP_SCANNER_FOUND)
+-  pkg_get_variable(PC_WAYLANDPP_SCANNER wayland-scanner++ wayland_scannerpp)
++# wayland-scanner++ is from native/host system in case of cross-compilation, so
++# it's ok if we don't find it with pkgconfig
++if(WITH_WAYLANDSCANNER)
++  get_filename_component(_wspath ${WITH_WAYLANDSCANNER} ABSOLUTE)
++  get_filename_component(_wspath ${_wspath} DIRECTORY)
++  find_program(WAYLANDPP_SCANNER NAMES "${APP_NAME_LC}-wayland-scanner++" wayland-scanner++
++               PATHS ${_wspath})
++  if(WAYLANDPP_SCANNER)
++    message(STATUS "Found external wayland-scanner++: ${WAYLANDPP_SCANNER}")
++  else()
++    message(SEND_ERROR "Could not find '${APP_NAME_LC}-wayland-scanner++' or 'wayland-scanner++' executable in ${_wspath} supplied by -DWITH_WAYLANDSCANNER.")
++  endif()
+ else()
+-  message(SEND_ERROR "wayland-scanner++ not found via pkg-config")
++  pkg_check_modules(PC_WAYLANDPP_SCANNER wayland-scanner++ QUIET)
++
++  if(PC_WAYLANDPP_SCANNER_FOUND)
++    pkg_get_variable(PC_WAYLANDPP_SCANNER wayland-scanner++ wayland_scannerpp)
++  else()
++    message(SEND_ERROR "wayland-scanner++ not found via pkg-config")
++  endif()
++  find_program(WAYLANDPP_SCANNER wayland-scanner++ PATHS ${PC_WAYLANDPP_SCANNER})
+ endif()
+ 
+ find_path(WAYLANDPP_INCLUDE_DIR wayland-client.hpp PATHS ${PC_WAYLANDPP_INCLUDEDIR})
+@@ -66,10 +82,6 @@ endif()
+ # Promote to cache variables so all code can access it
+ set(WAYLANDPP_PROTOCOLS_DIR "${PC_WAYLANDPP_PKGDATADIR}/protocols" CACHE INTERNAL "")
+ 
+-# wayland-scanner++ is from native/host system in case of cross-compilation, so
+-# it's ok if we don't find it with pkgconfig
+-find_program(WAYLANDPP_SCANNER wayland-scanner++ PATHS ${PC_WAYLANDPP_SCANNER})
+-
+ include (FindPackageHandleStandardArgs)
+ find_package_handle_standard_args(Waylandpp
+                                   REQUIRED_VARS WAYLANDPP_INCLUDE_DIR

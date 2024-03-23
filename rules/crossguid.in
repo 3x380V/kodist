@@ -1,0 +1,9 @@
+## SECTION=system_libraries
+
+config CROSSGUID
+	tristate
+	select HOST_CMAKE
+	select LIBUUID
+	prompt "crossguid"
+	help
+	  CrossGuid is a minimal, cross platform, C++ GUID library.

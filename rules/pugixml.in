@@ -1,0 +1,8 @@
+## SECTION=system_libraries
+
+config PUGIXML
+	tristate
+	prompt "pugixml"
+	select HOST_CMAKE
+	help
+	  Light-weight, simple and fast XML parser for C++ with XPath support.

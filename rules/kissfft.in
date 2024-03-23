@@ -1,0 +1,9 @@
+## SECTION=system_libraries
+
+config KISSFFT
+	tristate
+	prompt "kissfft"
+	select HOST_CMAKE
+	help
+	  A Fast Fourier Transform (FFT) library that tries to
+	  Keep it Simple, Stupid.

@@ -1,0 +1,7 @@
+## SECTION=hosttools_noprompt
+
+config HOST_JSONSCHEMABUILDER
+	tristate
+	default y if ALLYES
+	select HOST_CMAKE
+	select HOST_KODI

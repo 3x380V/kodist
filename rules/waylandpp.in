@@ -1,0 +1,13 @@
+## SECTION=multimedia_wayland
+
+config WAYLANDPP
+	tristate
+	prompt "waylandpp"
+	select HOST_CMAKE
+	select HOST_WAYLANDPP
+	select PUGIXML
+	select WAYLAND_PROTOCOLS
+	help
+	  C++ binding for Wayland using the most modern C++ technology
+	  currently available, providing an easy to use C++ API
+	  to Wayland.

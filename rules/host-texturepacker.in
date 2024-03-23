@@ -1,0 +1,7 @@
+## SECTION=hosttools_noprompt
+
+config HOST_TEXTUREPACKER
+	tristate
+	default y if ALLYES
+	select HOST_CMAKE
+	select HOST_KODI

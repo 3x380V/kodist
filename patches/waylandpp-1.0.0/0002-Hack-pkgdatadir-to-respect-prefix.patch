@@ -1,0 +1,21 @@
+From: Ladislav Michl <ladis@linux-mips.org>
+Date: Tue, 9 Apr 2024 17:47:53 +0200
+Subject: [PATCH] Hack pkgdatadir to respect prefix
+
+---
+ wayland-client++.pc.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/wayland-client++.pc.in b/wayland-client++.pc.in
+index 2b2a9944bd87..f1fea62c9405 100644
+--- a/wayland-client++.pc.in
++++ b/wayland-client++.pc.in
+@@ -24,7 +24,7 @@
+ prefix=@prefix@
+ exec_prefix=${prefix}
+ datarootdir=@datarootdir@
+-pkgdatadir=@pkgdatadir@
++pkgdatadir=${prefix}/..@pkgdatadir@
+ libdir=@libdir@
+ includedir=@includedir@
+ 

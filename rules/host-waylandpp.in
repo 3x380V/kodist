@@ -1,0 +1,8 @@
+## SECTION=hosttools_noprompt
+
+config HOST_WAYLANDPP
+	tristate
+	default y if ALLYES
+	select HOST_CMAKE
+	select HOST_PUGIXML
+        select HOST_WAYLAND

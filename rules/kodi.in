@@ -1,0 +1,83 @@
+## SECTION=kodi_specific
+
+config KODI
+	tristate
+	prompt "kodi"
+	select HOST_CMAKE
+	select HOST_KODI
+	select HOST_FLATBUFFERS
+	select HOST_JSONSCHEMABUILDER
+	select HOST_TEXTUREPACKER
+	select CROSS_GROOVY
+	select CROSS_APACHE_COMMONS_LANG
+	select CROSS_APACHE_COMMONS_TEXT
+	select CROSSGUID
+	select DAV1D
+	select DBUS
+	select FFMPEG
+	select FLATBUFFERS
+	select FSTRCMP
+	select GIFLIB
+	select KISSFFT
+	select LIBASS
+	select LIBCDIO
+	select LIBCDIO_CXX
+	select LIBCURL
+	select LIBDRM
+	select LIBDVDCSS	if KODI_DVDCSS
+	select LIBDVDNAV	if KODI_DVDCSS
+	select LIBDVDREAD	if KODI_DVDCSS
+	select LIBUDFREAD
+	select LIBFMT
+	select LIBJPEG
+	select LIBLZO
+	select LIBPNG
+	select LIBSPDLOG
+	select LIBTAG
+	select LIBVA
+	select LIBVA_WAYLAND
+	select LIBXML2
+	select LIBXSLT
+	select LIBPCRE
+	select LIBPCRE_LIBPCRECPP
+	select LIBXKBCOMMON
+	select MESALIB
+	select MESALIB_GLES2
+        select MESALIB_EGL_DRM
+        select MESALIB_GBM
+	select MESALIB_EGL_WAYLAND
+	select OPENSSL
+	select PYTHON3		if KODI_PYTHON
+	select PIPEWIRE
+	select RAPIDJSON
+	select SQLITE
+	select TINYXML
+	select TINYXML2
+	select UDEV
+	select UDEV_LIBUDEV
+	select WAYLANDPP
+	select XZ
+	select ZLIB
+	help
+	  Kodi is an award-winning free and open source home theater/media
+	  center software and entertainment hub for digital media.
+
+if KODI
+
+config KODI_DVDCSS
+	bool "Enable libdvdcss support"
+	depends on BROKEN
+
+config KODI_UPNP
+	bool "Enable UPnP support"
+
+config KODI_AIRTUNES
+	bool "Enable AirTunes support"
+
+config KODI_OPTICAL
+	bool "Enable optical support"
+
+config KODI_PYTHON
+	bool "Enable python support"
+
+endif

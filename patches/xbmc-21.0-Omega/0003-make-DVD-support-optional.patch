@@ -1,0 +1,31 @@
+From: Ladislav Michl <ladis@linux-mips.org>
+Date: Tue, 9 Apr 2024 17:10:17 +0200
+Subject: [PATCH] make DVD support optional
+
+---
+ CMakeLists.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index eb648e9a2704..82adaa5d7ca4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -212,7 +212,6 @@ set(required_deps ASS>=0.15.0
+                   HarfBuzz
+                   Iconv
+                   KissFFT
+-                  LibDvd
+                   Lzo2
+                   OpenSSL>=1.1.0
+                   PCRE
+@@ -290,6 +289,10 @@ if(ENABLE_AIRTUNES)
+   endif()
+ endif()
+ 
++if(ENABLE_DVDCSS)
++  core_require_dep(LibDvd)
++endif()
++
+ # find all folders containing addon.xml.in
+ # used to define ADDON_XML_OUTPUTS, ADDON_XML_DEPENDS and ADDON_INSTALL_DATA
+ # Function defined in ./cmake/scripts/common/Macros.cmake

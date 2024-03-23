@@ -1,0 +1,5 @@
+## SECTION=hosttools_noprompt
+
+config CROSS_APACHE_COMMONS_LANG
+	tristate
+	default y if ALLYES

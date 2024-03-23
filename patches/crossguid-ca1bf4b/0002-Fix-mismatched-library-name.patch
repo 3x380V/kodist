@@ -1,0 +1,21 @@
+From: Rich Moll <drise13@gmail.com>
+Date: Tue, 12 Dec 2023 13:14:54 -0600
+Subject: [PATCH] Fix mismatched library name
+
+---
+ cmake/FindLibuuid.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/FindLibuuid.cmake b/cmake/FindLibuuid.cmake
+index 58fa330418fc..9b5fd9d022f8 100644
+--- a/cmake/FindLibuuid.cmake
++++ b/cmake/FindLibuuid.cmake
+@@ -15,7 +15,7 @@ find_library(LIBUUID_LIBRARY
+ )
+ 
+ include(FindPackageHandleStandardArgs)
+-find_package_handle_standard_args(LibUUID
++find_package_handle_standard_args(Libuuid
+ 	FOUND_VAR
+ 		LIBUUID_FOUND
+ 	REQUIRED_VARS
